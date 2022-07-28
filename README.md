@@ -6,4 +6,4 @@
 - 分散共分散行列
 - plotのtype
 ## 平均、分散共分散行列、条件付き分布
-![ギブスサンプラー(2次元ver) 2022_07_28 16_10_52](https://user-images.githubusercontent.com/85211762/181443976-ab8b679c-9b7d-4e68-9a18-184bea65c4a3.png)
+![ギブスサンプラー(2次元ver) 2022_07_28 21_13_34](https://user-images.githubusercontent.com/85211762/181502411-f2286057-3c1e-43da-81fd-76a69303d437.png)
