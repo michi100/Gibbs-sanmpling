@@ -11,16 +11,24 @@ p_x2_given_x1 = function(mu,a_1,a_2,a_12,x1){
         sd=sqrt((a_1*a_2-a_12^2)/a_1))
 }
 
-gibbs_sampling = function(x_init,mu,a_1,a_2,a_12,plot_type){
-  x1 = x_init[1];x2 = x_init[2]
-  x1_vec = c();x2_vec = c()
-  for (i in 1:m){
-    x1 = p_x1_given_x2(mu,a_1,a_2,a_12,x2)
-    x1_vec = c(x1_vec,x1)
-    x2_vec = c(x2_vec,x2)
-    x2 = p_x2_given_x1(mu,a_1,a_2,a_12,x1)
-    x1_vec = c(x1_vec,x1)
-    x2_vec = c(x2_vec,x2)
+gibbs_sampling = function(x_init,mu,a_1,a_2,a_12,plot_type='p'){
+  if(a_1*a_2-a_12^2==0){
+    stop("a_1*a_2-a_12^2が0です。正である必要があります。")
+  }
+  else if(a_1*a_2-a_12^2<0){
+    stop("a_1*a_2-a_12^2が負です。正である必要があります。")
+  }
+  else{
+    x1 = x_init[1];x2 = x_init[2]
+    x1_vec = c();x2_vec = c()
+    for (i in 1:m){
+      x1 = p_x1_given_x2(mu,a_1,a_2,a_12,x2)
+      x1_vec = c(x1_vec,x1)
+      x2_vec = c(x2_vec,x2)
+      x2 = p_x2_given_x1(mu,a_1,a_2,a_12,x1)
+      x1_vec = c(x1_vec,x1)
+      x2_vec = c(x2_vec,x2)
+    }
   }
   plot(x1_vec,x2_vec,type=plot_type)
 }
@@ -37,9 +45,9 @@ m = 50
 mu = c(0,0)
 
 #分散共分散行列
-a_1 = 2    #x1の分散
+a_1 = 1    #x1の分散
 a_2 = 1    #x2の分散
-a_12 = 0.5 #x1とx2の共分散
+a_12 = 0.1 #x1とx2の共分散
 
 #散布図→"p"、折れ線→"l"
 plot_type = 'p'
